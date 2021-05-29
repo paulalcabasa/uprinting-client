@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #FBFBFB;
+}
+.page-wrapper {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+.page-subheader {
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #ccc;
+  padding-left: 0 !important;
+}
+.product-box {
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  cursor: pointer;
+}
+.product-box-separator {
+  border-bottom: 2px solid #ccc;
+}
+.product-label {
+  font-weight: bold;
+  text-align: right;
+}
+.product-price {
+  font-weight: bold;
+  font-size: 13pt;
+}
+.cart-header {
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #ccc;
+  padding-left: 0 !important;
+}
+.cart-box {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+.cart-price {
+  padding-right: 55px;
+}
+.currency-label {
+  text-align: right;
+}
+.order-address {
+  font-size: 0.8em;
+  display: block;
+}
+.order-customer-name {
+  display: block;
+  font-weight: bold;
+}
+.order-ship-to-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+header {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 10;
+  margin-top: 2em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid #ccc;
+}
+header .logo {
+  position: relative;
+  text-decoration: none;
+}
+header .navigation {
+  display: flex;
+  align-items: flex-end;
+}
+header ul {
+  margin: 0;
+}
+header .navigation li {
+  list-style: none;
+  margin: 0 10px;
+}
+header .navigation li a {
+  color: #126cb5;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+}

@@ -1,0 +1,23 @@
+<div class="row product-box">
+	<div class="col-lg-3  col-md-6 col-xs-6">
+		<img class="img-fluid"  [src]="product.product_thumbnail" alt=""/>
+	</div>
+	<div class="col-lg-9 col-md-6 col-xs-6">
+		<div class="row mb-3">
+			<div class="col-md-4 product-label">Product Name :</div>
+			<div class="col-md-8">{{ product.product_name }}</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-md-4 product-label">Product Description :</div>
+			<div class="col-md-8">{{ product.product_desc }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 product-label">Price :</div>
+			<div class="col-md-8 product-price">$ {{ product.price }}</div>
+		</div>
+		<div class="row " *ngIf="false">
+			<div class="col-md-4"></div>
+			<div class="col-md-8 product-price text-danger">Out of stock!</div>
+		</div>
+	</div>
+</div>

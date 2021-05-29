@@ -1,0 +1,56 @@
+
+<h6 class="text-center" *ngIf="cartItems.length == 0">Your cart is empty. <button type="button" class="btn btn-link" (click)="goToHome()">Add now!</button></h6> 
+
+<div *ngIf="cartItems.length > 0">
+    <div class="cart-header mobile-hidden">
+        <div class="row">
+            <div class="col-md-3"><span class="pl-2">Product</span></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-center pr-5">Quantity</div>
+            <div class="col-md-3 text-right cart-price">Price</div>
+        </div>
+    </div>
+    <div class="cart-box" *ngFor="let cartItem of cartItems; let i = index">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-fluid" [src]="cartItem.product_thumbnail" alt=""/>
+            </div>
+            <div class="col-md-3">
+                <h6 class="mb-3">{{ cartItem.product_name }}</h6>
+                <p class="mb-2">{{ cartItem.product_desc }}</p>
+                <span class="cart-product-price">$ {{ cartItem.price }} price each</span><br/>
+                <button type="button" (click)="removeCartItem(i)" class="btn btn-link">Remove item</button>
+            </div>
+            <div class="col-md-3 text-right pr-5">
+                <input type="text" 
+                    class="form-control input-sm" 
+                    [(ngModel)]="cartItem.qty"
+                />
+            </div>
+            <div class="col-md-3 text-right pr-5">{{ cartItem.qty * cartItem.price }}</div>
+        </div>
+    </div>
+    <div class="total">
+        <div class="row">
+            <div class="ml-md-auto col-md-4 pr-5">
+                <div class="row mb-3">
+                    <div class="col-md-6 col-sm-12">Subtotal</div>
+                    <div class="col-md-6 col-sm-12 currency-label">$ {{ computeSubtotal() }}</div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-6 col-sm-12">Shipping</div>
+                    <div class="col-md-6 col-sm-12 currency-label">0.00</div>
+                </div>
+                <div class="row mb-5 font-weight-bold text-danger">
+                    <div class="col-md-6">Grand Total</div>
+                    <div class="col-md-6 currency-label">$ {{ computeSubtotal() }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" (click)="checkOut()" class="btn btn-success btn-block">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

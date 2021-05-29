@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-lg-5  col-md-12 col-xs-12">
+		<img class="img-fluid"  [src]="product.product_thumbnail" alt=""/>
+	</div>
+	<div class="col-lg-7 col-md-12 col-xs-12">
+		<div class="row mb-3">
+			<div class="col-md-4 product-label">Product Name :</div>
+			<div class="col-md-8">{{ product.product_name }}</div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-md-4 product-label">Product Description :</div>
+			<div class="col-md-8">{{ product.product_desc }}</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-md-4 product-label">Unit Price :</div>
+			<div class="col-md-8 product-price">{{ product.price }}</div>
+		</div>
+		<div class="row mb-2">
+			<div class="col-md-4 product-label">Quantity:</div>
+			<div class="col-md-8">
+				<input type="text" 
+					required
+					[(ngModel)]="qty"
+					class="form-control input-sm input-quantity" />
+			</div>
+		</div>
+		<div class="row mb-5">
+			<div class="col-md-4 product-label">Price:</div>
+			<div class="col-md-8 product-price">{{ qty * product.price }}</div>
+		</div>
+		<!-- <div class="row hidden" *ngIf="false">
+			<div class="col-md-4"></div>
+			<div class="col-md-8 product-price text-danger">Out of stock!</div>
+		</div> -->
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-8">
+				<button type="button" add-to-cart-button [product]="product" class="btn btn-success btn-add-to-cart">Add to Cart</button>
+			</div>
+		</div>
+	
+	</div>
+</div>
