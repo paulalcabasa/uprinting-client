@@ -10,6 +10,7 @@ import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
