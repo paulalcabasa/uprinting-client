@@ -23,14 +23,14 @@ export class CartComponent implements OnInit {
 			.reduce((acc, cartItem) => parseFloat(cartItem.price) * (cartItem.qty) + parseFloat(acc), 0);
 	}
 
-	removeCartItem(index) 
+	removeCartItem(index, cartItemId) 
 	{
 		this.cartItems.splice(index, 1);
-	}
-
-	goToHome()
-	{
-		this.router.navigate(['/']);
+		// this.http.delete('cart/delete' + cartItemId).subscribe(
+		// 	if(success){
+		// 		this.cartItems.splice(index, 1);
+		// 	}
+		// );
 	}
 
 	checkOut()

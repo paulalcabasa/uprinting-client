@@ -4,8 +4,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule }      from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ApplicationRoutes } from './app.routes';
-import { CartModule } from './cart/cart.module';
 import { CoreModule } from './core/core.module';
+
+import { CartModule } from './cart/cart.module';
 import { ProductModule } from './product/product.module';
 import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';

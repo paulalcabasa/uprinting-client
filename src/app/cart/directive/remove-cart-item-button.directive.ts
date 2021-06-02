@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 export class RemoveCartItemButtonDirective implements OnInit, OnChanges
 {
 
-    @Input() product : any;
+    @Input() index : any;
     
     @HostListener('click') onclick()
     {
-        console.log('Add to cart clicked!', this.product);
+     //   console.log('Add to cart clicked!', this.product);
        // this.router.navigate(['cart']);
     }
 

@@ -5,6 +5,7 @@ import { LoginComponent } from "./component/login.component";
 import { CommonModule } from "@angular/common";
 import { FormsModule  } from '@angular/forms';
 import { CustomerRoutes } from "./customer.routes";
+import { AuthService } from "../auth/service/auth.service";
 
 @NgModule({
     imports : [
@@ -18,7 +19,7 @@ import { CustomerRoutes } from "./customer.routes";
         LoginComponent
     ],
     providers : [
-        
+        AuthService
     ],
     exports : [
         

@@ -14,6 +14,12 @@ export class OrderShippingComponent implements OnInit {
 
 	processOrder()
 	{
+		// perform validations
+
+		// if validated
+		// api to create job order
+		// alert
+		
 		this.router.navigate(['order/confirmation/' + '0001']);
 	}
 
