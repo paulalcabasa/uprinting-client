@@ -1,5 +1,5 @@
 
-<h6 class="text-center" *ngIf="cartItems.length == 0">Your cart is empty. <button type="button" class="btn btn-link" (click)="goToHome()">Add now!</button></h6> 
+<h6 class="text-center" *ngIf="cartItems.length == 0">Your cart is empty. <a routerLink="/">Add now!</a></h6> 
 
 <div *ngIf="cartItems.length > 0">
     <div class="cart-header mobile-hidden">

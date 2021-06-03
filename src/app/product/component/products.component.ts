@@ -1,25 +1,27 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../service/product.service";
-
+import { environment } from "../../../environments/environment";
 @Component({
   templateUrl: './products.component.html'
 })
 export class ProductsComponent implements OnInit {
 
-	public products : any = [];
+	products : any = [];
 
-	constructor(private productService: ProductService) { }
+	constructor(
+		private http: HttpClient,
+		private productService : ProductService) { }
 
 	ngOnInit() {
-		// this.products = this.ProductService.getProducts().subscribe(
-        //     products => {
-        //         this.products = products;
-        //         console.log("Products inside: ", products);
-        //     }
-        // )
-		this.products = this.productService.getProducts();
-        console.log("List of products" , this.products);
-        console.log("Products Loaded");
+
+        this.productService.getProducts().subscribe(
+			success => {
+				this.products = success;
+			},
+			error => {}
+		);
+
 	}
 
 }

@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'order-shipping',
@@ -7,12 +9,29 @@ import {Router} from '@angular/router';
 })
 export class OrderShippingComponent implements OnInit {
 
-	constructor(private router : Router) { }
+
+	form: any = {}
+	shippingRates: any;
+
+	constructor(
+		private router : Router,
+		private http: HttpClient
+	) { }
 
 	ngOnInit() {
+		let url = environment.app.api_url + '/shipping';
+		let body = {
+			cart : localStorage.getItem('cart')
+		};
+        return this.http.post<any>(url, body).subscribe(
+			success => {
+				this.shippingRates = success.ratesPerMethod;
+			},
+			error => {}
+		);
 	}
 
-	processOrder()
+	processOrder(form)
 	{
 		// perform validations
 

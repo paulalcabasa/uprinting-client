@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from '../../cart/service/cart.service';
 import { ProductService } from '../service/product.service'
 
 @Component({
@@ -8,28 +9,29 @@ import { ProductService } from '../service/product.service'
 })
 export class ProductDetailsComponent implements OnInit {
 
-	public product : any = [];
-	public qty: any;
+	product : any = {};
+	qty: any;
 
-    constructor(private ActivatedRoute: ActivatedRoute,
-        private ProductService : ProductService)
-    {}
+    constructor(
+		private ActivatedRoute: ActivatedRoute,
+        private productService : ProductService,
+		private cartService: CartService){}
 
     ngOnInit()
     {
 		this.qty = 1;
 		let product_id = this.ActivatedRoute.snapshot.params['product_id'];
-		this.product = this.ProductService.getProduct(product_id);
-        // 
-        // this.product = this.ProductService.getProduct(product_id).subscribe(
-        //     product => this.product = product
-        // );
-    	console.log("ProductDetails: ", this.product);
+		this.productService.getProduct(product_id).subscribe(
+			success => {
+				this.product = success.product;
+			},
+			error => {}
+    	);
     }
 
 	addToCart(product)
 	{
-		console.log(product);
+		this.cartService.setCartItem(product, this.qty);
 	}
 
 }

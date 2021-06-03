@@ -1,48 +1,54 @@
-//import { Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 //import { HttpClient } from "@angular/common/http";
 //import { environment } from "../../../environments/environment.local";
-//import { catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 //mport { throwError as observableThrowError, Observable } from 'rxjs';
 
-//@Injectable()
+@Injectable()
 
 export class CartService
 {
 
     private cart : any = [];
-    constructor()
+
+    constructor(private router: Router){}
+
+    getCartItems()
     {
-        this.cart = [
-            {
-                product_id : 1,
-                product_name : 'Card',
-                product_desc : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae semper velit. ',
-                price : '20.00',
-                product_thumbnail : 'assets/images/products/thumbnails/brochure1.jpg',
-                product_image : 'assets/images/products/brochure1.jpg',
-                qty : 1,
-                cart_id : 1
-            },
-            {
-                product_id : 2,
-                product_name : 'Poster',
-                product_desc : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae semper velit. ',
-                price : '15.00',
-                product_thumbnail : 'assets/images/products/thumbnails/brochure2.jpg',
-                product_image : 'assets/images/products/brochure2.jpg',
-                qty : 5,
-                cart_id : 1
-            }
-        ];
+        if(localStorage.getItem('cart')){
+            this.cart = JSON.parse(localStorage.getItem('cart'));
+        }
+        return this.cart;
     }
 
-    public getCartItems()
+    setCartItem(product, qty)
     {
-        return this.cart;
-      //  let url = environment.app.api_url + 'product';
-        // return this.Http.get(url).pipe(
-        //     catchError((error : any) => observableThrowError(error))
-        // );
+
+        let cart = this.getCartItems();
+		
+		let index = cart.findIndex(x => x.product_id === product.product_id);
+        
+		if(index == -1){
+            product.qty = qty;
+			cart.push(product);
+		}
+		else {
+			cart[index].qty = parseFloat(cart[index].qty) + parseFloat(qty);
+		}
+
+        console.log(index);
+		localStorage.setItem('cart', JSON.stringify(cart));
+        
+        this.router.navigate(['/cart']);
     }
+
+    removeCartItem(index)
+    {
+        let cart = this.getCartItems();
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
 
 }

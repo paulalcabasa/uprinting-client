@@ -23,6 +23,9 @@ body {
   padding-bottom: 1em;
   cursor: pointer;
 }
+div.product-box {
+  border-bottom: 2px solid #ccc;
+}
 .product-box-separator {
   border-bottom: 2px solid #ccc;
 }

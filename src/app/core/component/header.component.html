@@ -3,7 +3,12 @@
         <img class="img-responsive" width="200px" style="height:100%;" src="assets/images/logo.png" alt="UPrinting Logo"/>
     </a>   
     <ul class="navigation">
-        <li><a routerLink="/customer">Login</a></li>|
-        <li><a routerLink="/cart">Cart</a></li>
+        <li *ngIf="user"><a>Welcome {{ user.first_name }}</a></li>
+        <span *ngIf="user">|</span>
+        <li><a (click)="logout()" *ngIf="user" class="logout">Logout</a></li>
+        <span *ngIf="user">|</span>
+        <li *ngIf="!user"><a routerLink="/customer">Login</a></li>
+        <span *ngIf="!user">|</span>
+        <li><a routerLink="/cart">Cart</a></li>   
     </ul>
 </header>

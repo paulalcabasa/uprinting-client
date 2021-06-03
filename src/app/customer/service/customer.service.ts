@@ -6,22 +6,17 @@ import { throwError as observableThrowError, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable()
 
-export class ProductService
+export class CustomerService
 {
 
     constructor(private http: HttpClient) {}
 
-    public getProducts()
+    createCustomer(customer)
     {
-        let url = environment.app.api_url + '/product';
-        return this.http.get(url).pipe(
+        let url = environment.app.api_url + '/customer';
+        return this.http.post<any>(url, customer).pipe(
             catchError((error : any) => observableThrowError(error)));
     }
 
-    public getProduct(product_id : number)
-    {
-        let url = environment.app.api_url + '/product/' + product_id;
-        return this.http.get<any>(url).pipe(
-            catchError((error : any) => observableThrowError(error)));
-    }
+ 
 }

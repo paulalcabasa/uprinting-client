@@ -1,32 +1,94 @@
-<form method="post" class="form" >
-  <div class="form-group">
-      <label for="">Email</label>
-      <input type="email" id="email" name="email" class="form-control" />
-  </div>
-  <div class="form-group">
-      <label for="">Password</label>
-      <input type="password" id="password" name="password" class="form-control"  />
-
-  </div>
-  <div class="form-group">
-      <label for="">Confirm Password</label>
-      <input type="password" id="confirm_password" name="confirm_password" class="form-control"  />
-    
-  </div>
-  <div class="form-group">
-      <label for="">Company Name</label>
-      <input type="text" id="company_name" name="company_name" class="form-control" />
-  </div>
-  <div class="form-group">
-      <label for="">First Name</label>
-      <input type="text" id="first_name" name="first_name" class="form-control" />
-      
-  </div>
-  <div class="form-group">
-      <label for="">Last Name</label>
-      <input type="text" id="last_name" name="last_name" class="form-control"  />
-  </div>
+<form  class="form" #f="ngForm" (ngSubmit)="register(f.value)">
+    <div class="form-group">
+        <label for="">Email</label>
+        <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            class="form-control"
+            required
+            #email="ngModel"
+            [(ngModel)]="form.email" 
+        />
+        <small class="text-danger">
+            <span *ngIf="email.touched && email.invalid">Email is required.</span>
+            <span *ngIf="email.touched && errors?.mail">{{ errors?.mail }}</span>
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="">Password</label>
+        <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            class="form-control"
+            required
+            #password="ngModel"
+            [(ngModel)]="form.password" 
+        />
+        <small class="text-danger" *ngIf="password.touched && password.invalid">
+            Password is required.
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="">Confirm Password</label>
+        <input 
+            type="password" 
+            id="confirmPassword" 
+            name="confirm_password" 
+            class="form-control" 
+            required
+            #confirmPassword="ngModel"
+            [(ngModel)]="form.confirmPassword"  
+        />
+        <small class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
+            Confirm Password is required.
+        </small>
+        <small class="text-danger" *ngIf="errors">
+            <span *ngIf="errors?.confirm_password?.notSame">Passwords does not match.</span>
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="">Company Name</label>
+        <input 
+            type="text" 
+            id="companyName" 
+            name="company_name" 
+            class="form-control"
+            [(ngModel)]="form.companyName" 
+        />
+    </div>
+    <div class="form-group">
+        <label for="">First Name</label>
+        <input 
+            type="text" 
+            id="firstName" 
+            name="first_name" 
+            class="form-control"
+            required
+            #firstName = "ngModel"
+            [(ngModel)]="form.firstName"
+        />
+        <small class="text-danger" *ngIf="firstName.touched && firstName.invalid">
+            First name is required.
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="">Last Name</label>
+        <input 
+            type="text" 
+            id="last_name"
+            name="last_name"
+            class="form-control"  
+            required
+            #lastName = "ngModel"
+            [(ngModel)]="form.lastName"
+        />
+        <small class="text-danger" *ngIf="lastName.touched && lastName.invalid">
+            Last name is required.
+        </small>
+    </div>
   <div class="text-center">
-      <button type="submit" class="btn btn-success btn-register">Register</button>
+      <button type="submit" [disabled]="f.invalid" class="btn btn-success btn-register">Register</button>
   </div>
 </form>

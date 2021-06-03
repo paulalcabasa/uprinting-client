@@ -11,9 +11,9 @@
             #email="ngModel"
             [(ngModel)]="credentials.email"
         />
-        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+        <small class="text-danger" *ngIf="email.touched && email.invalid">
             Email is required.
-        </div>
+        </small>
     </div>
     <div class="form-group">
         <label for="">Password</label>
@@ -26,11 +26,11 @@
             #password="ngModel"
             [(ngModel)]="credentials.password"
         />
-        <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+        <small class="text-danger" *ngIf="password.touched && password.invalid">
             Password is required.
-        </div>
+        </small>
     </div>
     <div class="text-center">
-        <button type="submit" class="btn btn-success btn-login">Login</button>
+        <button type="submit" [disabled]="f.invalid" class="btn btn-success btn-login">Login</button>
     </div>
 </form>

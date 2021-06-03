@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../auth/service/auth.service';
 import { environment } from '../../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private http: HttpClient,	
 		private authService : AuthService,
-		private router: Router
+		private router: Router,
+		private route: ActivatedRoute
 	) { }
 
 	ngOnInit() {
@@ -26,22 +27,19 @@ export class LoginComponent implements OnInit {
 
 	login(credentials) {
 		let url = environment.app.api_url + '/auth';
-
+		let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
 		return this.http.post<any>(url, credentials).subscribe(
 			data => {
 				this.authService.setAccessToken(data.token);
-				this.router.navigate(['/']);
+				window.location.href = returnUrl;
+				//this.router.navigate([returnUrl]);
 			},
 			error => {
 				this.error = 'Invalid username or password';
-				//console.log("oops", error)
 			}
 		);
            
 	}
 
-}
-function observableThrowError(error: any): import("rxjs").ObservableInput<unknown> {
-	throw new Error('Function not implemented.');
 }
 
