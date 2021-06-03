@@ -19,6 +19,11 @@ export class HeaderComponent implements OnInit {
 		this.user = this.authService.parseAccessTokenData().data;
 	}
 
+	// use lifecycle hook
+
+	// create subscribe to emit globally
+
+
 	onClick()
 	{
 		console.log("clicked link");

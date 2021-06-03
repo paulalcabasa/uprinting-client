@@ -19,12 +19,13 @@
                 <h6 class="mb-3">{{ cartItem.product_name }}</h6>
                 <p class="mb-2">{{ cartItem.product_desc }}</p>
                 <span class="cart-product-price">$ {{ cartItem.price }} price each</span><br/>
-                <button type="button" remove-cart-item-button product="product" (click)="removeCartItem(i)" class="btn btn-link">Remove item</button>
+                <button type="button" remove-cart-item-button product="product" (click)="removeCartItem(i, cartItem)" class="btn btn-link">Remove item</button>
             </div>
             <div class="col-md-3 text-right pr-5">
                 <input type="text" 
                     class="form-control input-sm" 
-                    [(ngModel)]="cartItem.qty"
+                    [ngModel]="cartItem.qty"
+                    (ngModelChange)="updateQuantity($event, cartItem, i)"
                 />
             </div>
             <div class="col-md-3 text-right pr-5">{{ cartItem.qty * cartItem.price }}</div>

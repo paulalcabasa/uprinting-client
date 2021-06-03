@@ -19,7 +19,9 @@ export class ProductsComponent implements OnInit {
 			success => {
 				this.products = success;
 			},
-			error => {}
+			error => {
+				console.log(error);
+			}
 		);
 
 	}

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { CartService } from '../../cart/service/cart.service';
 import { environment } from "../../../environments/environment";
 
 @Component({
@@ -15,15 +16,16 @@ export class OrderShippingComponent implements OnInit {
 
 	constructor(
 		private router : Router,
-		private http: HttpClient
+		private http: HttpClient,
+		private cartService: CartService
 	) { }
 
 	ngOnInit() {
-		let url = environment.app.api_url + '/shipping';
-		let body = {
-			cart : localStorage.getItem('cart')
-		};
-        return this.http.post<any>(url, body).subscribe(
+		let url = environment.app.api_url + '/shipping/' + this.cartService.getCartId();
+		// let body = {
+		// 	cart : localStorage.getItem('cart')
+		// };
+        return this.http.get<any>(url).subscribe(
 			success => {
 				this.shippingRates = success.ratesPerMethod;
 			},
