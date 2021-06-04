@@ -42,7 +42,7 @@ export class CartService
         let user = this.authService.parseAccessTokenData();
 
         cartItem.cartId = this.getCartId();
-        cartItem.customerId = user.data.customer_id;
+       // cartItem.customerId = user.data.customer_id;
     
         return this.http.post<any>(url, cartItem).pipe(
             catchError((error : any) => observableThrowError(error)));
@@ -62,6 +62,10 @@ export class CartService
         return this.http.put<any>(url, cartItem).pipe(
             catchError((error : any) => observableThrowError(error)));
      
+    }
+
+    deleteCart() {
+        localStorage.removeItem('cartId');
     }
 
 

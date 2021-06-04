@@ -3,6 +3,6 @@ export const environment = {
   env : "local",
   app : {
 		"client_url" : "http://localhost:4200/",
-		"api_url" : "http://api.uprinting.test/"
+		"api_url" : "http://api.uprinting.test"
 	}
 };

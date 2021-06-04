@@ -15,6 +15,10 @@ import { AuthService } from './auth/service/auth.service';
 import { AuthGuardService } from './auth/service/auth-guard.service';
 import { AuthHttpInterceptor } from './auth/interceptor/auth-http.interceptor';
 
+// import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+// import {ROUTER_PROVIDERS} from '@angular/router';
+//import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 @NgModule({
 	declarations: [
 	AppComponent
@@ -37,7 +41,9 @@ import { AuthHttpInterceptor } from './auth/interceptor/auth-http.interceptor';
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthHttpInterceptor,
 			multi: true
-		}
-	]
+		},
+		//{provide: LocationStrategy, useClass: HashLocationStrategy}
+	],
+	
 })
 export class AppModule { }

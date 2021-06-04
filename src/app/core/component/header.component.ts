@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
 	logout()
 	{
 		this.authService.deleteAccessToken();
+		localStorage.removeItem('cartId');
 		window.location.href="/";
 		//this.router.navigate(['/']);
 	}

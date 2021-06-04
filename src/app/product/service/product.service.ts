@@ -11,15 +11,13 @@ export class ProductService
 
     constructor(private http: HttpClient) {}
 
-    public getProducts()
-    {
+    getProducts() {
         let url = environment.app.api_url + '/product';
         return this.http.get(url).pipe(
             catchError((error : any) => observableThrowError(error)));
     }
 
-    public getProduct(product_id : number)
-    {
+    getProduct(product_id) {
         let url = environment.app.api_url + '/product/' + product_id;
         return this.http.get<any>(url).pipe(
             catchError((error : any) => observableThrowError(error)));

@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
 			success => {
 				if(!success.state) {
 					alert(success.message);
-					this.cartItems[index].qty = parseFloat(cartItem.qty);	
+					this.cartItems[index].qty = 1;	
 				}
 			},
 			error => {

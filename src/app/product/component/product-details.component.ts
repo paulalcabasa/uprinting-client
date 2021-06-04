@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../../cart/service/cart.service';
 import { ProductService } from '../service/product.service'
@@ -18,20 +18,20 @@ export class ProductDetailsComponent implements OnInit {
 		private cartService: CartService,
 		private router: Router){}
 
-    ngOnInit()
-    {
+    ngOnInit() {
 		this.qty = 1;
 		let product_id = this.ActivatedRoute.snapshot.params['product_id'];
-		this.productService.getProduct(product_id).subscribe(
-			success => {
-				this.product = success.product;
-			},
-			error => {}
-    	);
+		if(product_id){
+			this.productService.getProduct(product_id).subscribe(
+				success => {
+					this.product = success.product;
+				},
+				error => {}
+			);
+		}
     }
 
-	addToCart(product)
-	{
+	addToCart(product) {
 		
 		let cartItem = {
 			product : product,
@@ -46,6 +46,7 @@ export class ProductDetailsComponent implements OnInit {
 				} else {
 					alert(success.message);
 				}
+				console.log(success);
 			},
 			error => {
 				console.log(error);

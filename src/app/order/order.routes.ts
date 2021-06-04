@@ -11,6 +11,7 @@ export const OrderRoutes = RouterModule.forChild([
     },
     {
         path : 'order/confirmation/:order_id',
-        component : OrderConfirmationComponent
+        component : OrderConfirmationComponent,
+        canActivate: [AuthGuardService]
     }
 ]);

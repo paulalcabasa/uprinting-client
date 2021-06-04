@@ -47,6 +47,7 @@ export class OrderShippingComponent implements OnInit {
 		this.orderService.processOrder(form).subscribe(
 			success => {
 				if(success.state){
+					this.cartService.deleteCart();
 					this.router.navigate(['order/confirmation/' + success.jobOrderId]);
 				}
 				

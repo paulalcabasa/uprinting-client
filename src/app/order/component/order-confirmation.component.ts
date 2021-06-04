@@ -31,12 +31,16 @@ export class OrderConfirmationComponent implements OnInit {
 	}
 
 	computeSubtotal() {
-		return this.jobOrderItems
-			.reduce((acc, item) => parseFloat(item.price) + parseFloat(acc), 0);
+		if(this.jobOrderItems)
+			return this.jobOrderItems
+				.reduce((acc, item) => parseFloat(item.price) + 
+									   parseFloat(acc), 0);
 	}
 
 	computeGrandTotal() {
-		return parseFloat(this.computeSubtotal()) + parseFloat(this.jobOrder.shipping_total);
+		if(this.jobOrderItems)
+			return parseFloat(this.computeSubtotal()) + 
+				   parseFloat(this.jobOrder.shipping_total);
 	}
 
 }
