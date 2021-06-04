@@ -1,15 +1,19 @@
 <div class="row mb-4">
-  <div class="col-md-8">
-      <strong>Order id#: 00001 </strong>
-  </div>
-  <div class="col-md-4">
-      <span class="order-ship-to-label">Ship To:</span>
-      <span class="order-customer-name">Paul Alcabasa</span>
-      <span class="order-address"> Address 1 Address 2 Adress 3</span>
-      <span class="order-address">City</span>
-      <span class="order-address">State</span>
-      <span class="order-address">Country</span>
-  </div>
+    <div class="col-md-8">
+        <strong>Order id#: {{ jobOrder?.job_order_id }} </strong>
+    </div>
+    <div class="col-md-4">
+        <span class="order-ship-to-label">Ship To:</span>
+        <span class="order-customer-name">{{ jobOrder?.first_name + " " + jobOrder?.last_name }}</span>
+        <span class="order-address">
+            {{ jobOrder?.shipping_address1 }} 
+            {{ jobOrder?.shipping_address2 }}
+            {{ jobOrder?.shipping_address1 }}
+        </span>
+        <span class="order-address">{{ jobOrder?.shipping_city }}</span>
+        <span class="order-address">{{ jobOrder?.shipping_state }}</span>
+        <span class="order-address">{{ jobOrder?.shipping_country }}</span>
+    </div>
 </div>
 
 <div class="cart-header mobile-hidden">
@@ -21,19 +25,19 @@
   </div>
 </div>
 
-<div class="cart-box" >
-  <div class="row">
-      <div class="col-md-3">
-          <img class="img-fluid" src="" alt=""/>
-      </div>
-      <div class="col-md-3">
-          <h6 class="mb-3">PRODUCT NAME</h6>
-          <p class="mb-2">DESC</p>
-          <span class="cart-product-price">$ UNIT PRICE each</span>
-      </div>
-      <div class="col-md-3 text-right pr-5">QTY</div>
-      <div class="col-md-3 text-right pr-5">PRICE</div>
-  </div>
+<div class="cart-box" *ngFor="let item of jobOrderItems">
+    <div class="row">
+        <div class="col-md-3">
+            <img class="img-fluid" [src]="item.product_thumbnail" alt=""/>
+        </div>
+        <div class="col-md-3">
+            <h6 class="mb-3">{{ item?.product_name }}</h6>
+            <p class="mb-2">{{ item?.product_desc }}</p>
+            <span class="cart-product-price">$ {{ item?.unit_price }} each</span>
+        </div>
+        <div class="col-md-3 text-right pr-5">{{ item?.qty }}</div>
+        <div class="col-md-3 text-right pr-5">{{ item?.price }}</div>
+    </div>
 </div>
 
 
@@ -43,15 +47,15 @@
       <div class="ml-md-auto col-md-4 pr-5">
           <div class="row mb-3">
               <div class="col-md-6 col-sm-12">Subtotal</div>
-              <div class="col-md-6 col-sm-12 currency-label">$ 150.00</div>
+              <div class="col-md-6 col-sm-12 currency-label">$ {{ computeSubtotal() }}</div>
           </div>
           <div class="row mb-5">
               <div class="col-md-6 col-sm-12">Shipping</div>
-              <div class="col-md-6 col-sm-12 currency-label">$ 40.00</div>
+              <div class="col-md-6 col-sm-12 currency-label">$ {{ jobOrder?.shipping_total }}</div>
           </div>
           <div class="row mb-5 font-weight-bold text-primary">
               <div class="col-md-6">Grand Total</div>
-              <div class="col-md-6 currency-label">$ 20.00</div>
+              <div class="col-md-6 currency-label">$ {{ computeGrandTotal() }}</div>
           </div>
           <div class="row">
               <div class="col-md-12">

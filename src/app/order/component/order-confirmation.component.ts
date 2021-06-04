@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../service/order.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'order-confirmation',
@@ -6,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderConfirmationComponent implements OnInit {
 
-  constructor() { }
+	jobOrder;
+	jobOrderItems;
 
-  ngOnInit() {
-  }
+	constructor(
+		private orderService: OrderService,
+		private ActivatedRoute: ActivatedRoute,
+		private router : Router
+	) { }
+
+
+	ngOnInit() {
+		let jobOrderId = this.ActivatedRoute.snapshot.params['order_id'];
+		this.orderService.getOrder(jobOrderId).subscribe(
+			success => {
+				
+				this.jobOrder = success.joHeader;
+				this.jobOrderItems = success.items;
+			},
+			error => {}
+		);
+	}
+
+	computeSubtotal() {
+		return this.jobOrderItems
+			.reduce((acc, item) => parseFloat(item.price) + parseFloat(acc), 0);
+	}
+
+	computeGrandTotal() {
+		return parseFloat(this.computeSubtotal()) + parseFloat(this.jobOrder.shipping_total);
+	}
 
 }
