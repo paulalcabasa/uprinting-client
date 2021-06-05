@@ -1,101 +1,107 @@
-<p class="alert alert-primary">
-    <small>All fields with asterisk (<span class="text-danger">*</span>) are required.</small>
-</p>
 
-<form  class="form" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+<form  class="form" #f="ngForm" (ngSubmit)="register(f.value)">
+    <input type="hidden" csrf />
 
     <div class="form-group">
         <label for="">Email <span class="text-danger">*</span></label>
         <input 
-            formControlName="email"
+            pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+            required
+            maxlength="50"
             type="email" 
             id="email" 
-            class="form-control"/>
-        <small class="text-danger" *ngIf="email.touched && email.invalid">
-            <span *ngIf="email.errors.required"  class="d-block">Email is required.</span>
-            <span *ngIf="email.errors.email" class="d-block">Must be a valid email address.</span>
-            <span *ngIf="email.errors.minlength"  class="d-block">
-                Email should be minimum of 
-                {{ email.errors.minlength.requiredLength }}
-                characters.
+            name="email" 
+            class="form-control"
+            #email="ngModel"
+            [(ngModel)]="form.email" 
+        />
+        <small class="text-danger">
+            <span *ngIf="email.touched && email.invalid">
+                <span *ngIf="email.errors.required">Email is required.</span>
+                <span *ngIf="email.errors.pattern">Must be a valid email address.</span>
             </span>
+            <span *ngIf="email.touched && errors?.mail">{{ errors?.mail }}</span>
         </small>
-        <small class="text-danger" *ngIf="errors?.mail">{{ errors?.mail }}</small>
-        <small class="text-danger" *ngIf="errors?.email">{{ errors?.email.isEmpty }}</small>
     </div>
-
     <div class="form-group">
         <label for="">Password <span class="text-danger">*</span></label>
         <input 
-            formControlName="password"
+            maxlength="20"
             type="password" 
             id="password" 
             name="password" 
             class="form-control"
+            required
+            #password="ngModel"
+            [(ngModel)]="form.password" 
         />
         <small class="text-danger" *ngIf="password.touched && password.invalid">
-            <span *ngIf="password.errors.required">Password is required.</span>
+            Password is required.
         </small>
-        <small class="text-danger" *ngIf="errors?.password">{{ errors?.password.isEmpty }}</small>
     </div>
     <div class="form-group">
         <label for="">Confirm Password <span class="text-danger">*</span></label>
         <input 
-            formControlName="confirm_password"
+            maxlength="20"
             type="password" 
             id="confirmPassword" 
             name="confirm_password" 
             class="form-control" 
+            required
+            #confirmPassword="ngModel"
+            [(ngModel)]="form.confirmPassword"  
         />
         <small class="text-danger" *ngIf="confirmPassword.touched && confirmPassword.invalid">
-            <span *ngIf="confirmPassword.errors.required" class="d-block">Confirm password is required.</span>
+            Confirm Password is required.
         </small>
         <small class="text-danger" *ngIf="errors">
             <span *ngIf="errors?.confirm_password?.notSame">Passwords does not match.</span>
-            <span *ngIf="errors?.confirm_password?.isEmpty">{{ errors.confirm_password.isEmpty }}</span>
         </small>
     </div>
     <div class="form-group">
         <label for="">Company Name</label>
         <input 
-            formControlName="company_name"
             maxlength="50"
             type="text" 
             id="companyName" 
             name="company_name" 
             class="form-control"
+            [(ngModel)]="form.companyName" 
         />
     </div>
     <div class="form-group">
         <label for="">First Name <span class="text-danger">*</span></label>
         <input 
-            formControlName="first_name"
+            maxlength="30"
             type="text" 
             id="firstName" 
             name="first_name" 
             class="form-control"
+            required
+            #firstName = "ngModel"
+            [(ngModel)]="form.firstName"
         />
         <small class="text-danger" *ngIf="firstName.touched && firstName.invalid">
-            <span *ngIf="firstName.errors.required">First name is required.</span>
+            First name is required.
         </small>
-        <small class="text-danger" *ngIf="errors?.first_name">{{ errors?.first_name.isEmpty }}</small>
     </div>
     <div class="form-group">
         <label for="">Last Name <span class="text-danger">*</span></label>
         <input 
-            formControlName="last_name"
+            maxlength="30"
             type="text" 
             id="last_name"
             name="last_name"
             class="form-control"  
+            required
+            #lastName = "ngModel"
+            [(ngModel)]="form.lastName"
         />
         <small class="text-danger" *ngIf="lastName.touched && lastName.invalid">
-            <span *ngIf="lastName.errors.required">Last name is required.</span>
+            Last name is required.
         </small>
-        <small class="text-danger" *ngIf="errors?.last_name">{{ errors?.last_name.isEmpty }}</small>
     </div>
-  
-    <div class="text-center">
-        <button type="submit" [disabled]="registerForm.invalid"  class="btn btn-success btn-register">Register</button>
-    </div>
+  <div class="text-center">
+      <button type="submit" [disabled]="f.invalid" class="btn btn-success btn-register">Register</button>
+  </div>
 </form>

@@ -5,6 +5,7 @@ import { CartService } from '../../cart/service/cart.service';
 import { environment } from "../../../environments/environment";
 import { OrderService } from '../../order/service/order.service';
 import { AuthService } from '../../auth/service/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'order-shipping',
@@ -12,9 +13,7 @@ import { AuthService } from '../../auth/service/auth.service';
 })
 export class OrderShippingComponent implements OnInit {
 
-	form: any = {
-		shippingMethod : 'Ground'
-	};
+	form;
 
 	shippingRates: any;
 
@@ -25,17 +24,79 @@ export class OrderShippingComponent implements OnInit {
 		private orderService: OrderService,
 		private authService: AuthService
 	) { }
-
+	
 	ngOnInit() {
 		let url = environment.app.api_url + '/shipping/' + this.cartService.getCartId();
 		
-        return this.http.get<any>(url).subscribe(
+        this.http.get<any>(url).subscribe(
 			success => {
 				this.shippingRates = success.ratesPerMethod;
 			},
 			error => {}
 		);
+
+		this.form = new FormGroup({
+			shipping_name: new FormControl('', [
+				Validators.required,
+				Validators.maxLength(3),
+				Validators.maxLength(35)
+			]),
+			shipping_address1: new FormControl('', [
+				Validators.required,
+				Validators.minLength(3),
+				Validators.maxLength(35)
+			]),
+			shipping_address2: new FormControl('', [
+				Validators.maxLength(35)
+			]),
+			shipping_address3: new FormControl('', [
+				Validators.maxLength(35)
+			]),
+			shipping_city: new FormControl('', [
+				Validators.required,
+				Validators.maxLength(35)
+			]),
+			shipping_state: new FormControl('', [
+				Validators.required,
+				Validators.maxLength(35)
+			]),
+			shipping_country: new FormControl('', [
+				Validators.required,
+				Validators.maxLength(35)
+			]),
+			shipping_method: new FormControl('Ground'),
+		});
 	}
+
+	get shippingName() {
+		return this.form.get('shipping_name');
+	}
+
+	get shippingAddress1() {
+		return this.form.get('shipping_address1');
+	}
+
+	get shippingAddress2() {
+		return this.form.get('shipping_address2');
+	}
+
+	get shippingAddress3() {
+		return this.form.get('shipping_address3');
+	}
+
+	get shippingCity() {
+		return this.form.get('shipping_city');
+	}
+
+	get shippingState() {
+		return this.form.get('shipping_state');
+	}
+
+	get shippingCountry() {
+		return this.form.get('shipping_country');
+	}
+
+
 
 	processOrder(form) {
 		

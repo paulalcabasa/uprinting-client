@@ -6,29 +6,34 @@
     <div class="col-lg-8">
         <p class="alert alert-info">All fields with asterisk (*) are required.</p>
         
-        <form class="form" [formGroup]="form" (ngSubmit)="processOrder(form.value)">
+        <form class="form" #f="ngForm" (ngSubmit)="processOrder(f.value)">
             <div class="form-group">
                 <label for="shippingName">Name <span class="text-danger">*</span></label>
                 <input 
-                    formControlName="shipping_name"
+                    required
                     type="text" 
                     id="shippingName" 
                     name="shipping_name" 
                     class="form-control"
+                    #shippingName="ngModel"
+                    [(ngModel)]="form.shippingName" 
                 />
-                <small class="text-danger" *ngIf="shippingName.touched && shippingName.invalid">
-                    <span *ngIf="shippingName.errors.required">Shipping name is required.</span>
-                    <span *ngIf="shippingName.errors.maxlength">Shipping name must be less than 35 characters.</span>
+                <small class="text-danger" *ngIf="shippingName.touched">
+                    <span *ngIf="shippingName.invalid">Shipping name is required.</span>
                 </small>
             </div>
             <div class="form-group">
                 <label for="shippingAddress1">Address 1 <span class="text-danger">*</span></label>
                 <input 
-                    formControlName="shipping_address1"
+                    required
+                    maxlength="35"
+
                     type="text" 
                     id="shippingAddress1" 
                     name="shipping_address1" 
                     class="form-control" 
+                    #shippingAddress1="ngModel"
+                    [(ngModel)]="form.shippingAddress1" 
                     
                 />
                 <small class="text-danger" *ngIf="shippingAddress1.touched && shippingAddress1.invalid">
@@ -40,74 +45,86 @@
             <div class="form-group">
                 <label for="shippingAddress2">Address 2</label>
                 <input 
-                    formControlName="shipping_address2"
                     type="text" 
                     id="shippingAddress2" 
                     name="shipping_address2" 
                     class="form-control" 
+                    #shippingAddress2="ngModel"
+                    [(ngModel)]="form.shippingAddress2"
                 />
-                <small class="text-danger" *ngIf="shippingAddress2.touched && shippingAddress2.invalid">
-                    <span *ngIf="shippingAddress2.errors.maxlength">Max characters is up to 35 characters.</span>
-                </small>
             </div>
             <div class="form-group">
-                <label for="shippingAddress2">Address 3</label>
+                <label for="shippingAddress3">Address 3</label>
                 <input 
-                    formControlName="shipping_address3"
                     type="text" 
-                    class="form-control" 
+                    id="shippingAddress3" 
+                    name="shipping_address3" 
+                    class="form-control"
+                    #shippingAddress3="ngModel"
+                    [(ngModel)]="form.shippingAddress3"   
                 />
-                <small class="text-danger" *ngIf="shippingAddress3.touched && shippingAddress3.invalid">
-                    <span *ngIf="shippingAddress3.errors.maxlength">Max characters is up to 35 characters.</span>
-                </small>
             </div>
             <div class="form-group">
                 <label for="city">City <span class="text-danger">*</span></label>
                 <input 
-                    formControlName="shipping_city"
+                    required
+                    maxlength="35"
                     type="text" 
+                    id="city" 
+                    name="shipping_city" 
                     class="form-control" 
-                 
+                    #shippingCity="ngModel"
+                    [(ngModel)]="form.shippingCity" 
                 />
-                <small class="text-danger" *ngIf="shippingCity.touched && shippingCity.invalid">
-                    <span *ngIf="shippingCity.errors.required">Shipping City is required.</span>
+                <small class="text-danger" *ngIf="shippingCity.touched">
+                    <span *ngIf="shippingCity.invalid">Shipping City is required.</span>
                 </small>
              </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label for="state">State <span class="text-danger">*</span></label>
                 <input 
-                    formControlName="shipping_state"
+                    required
+                    maxlength="35"
                     type="text"
+                    id="state" 
+                    name="shipping_state" 
                     class="form-control"
+                    #shippingState="ngModel"
+                    [(ngModel)]="form.shippingState" 
                 />
-                <small class="text-danger" *ngIf="shippingState.touched && shippingState.invalid">
-                    <span *ngIf="shippingState.errors.required">Shipping state is required.</span>
+                <small class="text-danger" *ngIf="shippingState.touched">
+                    <span *ngIf="shippingState.invalid">Shipping state is required.</span>
                 </small>
             </div>
             <div class="form-group">
                 <label for="country">Country <span class="text-danger">*</span></label>
                 <input 
-                    formControlName="shipping_country"
+                    required
+                    maxlength="35"
                     type="text" 
+                    id="country" 
+                    name="shipping_country" 
                     class="form-control"
-                  
+                    #shippingCountry="ngModel"
+                    [(ngModel)]="form.shippingCountry"  
                 />
-                <small class="text-danger" *ngIf="shippingCountry.touched && shippingCountry.invalid">
-                    <span *ngIf="shippingCountry.errors.required">Shipping country is required.</span>
+                <small class="text-danger" *ngIf="shippingCountry.touched">
+                    <span *ngIf="shippingCountry.invalid">Shipping country is required.</span>
                 </small>
             </div>
-
             <div class="row">
                 <div class="col-md-6">
                     <div class="custom-control custom-radio mb-3">
                         <input 
-                            formControlName="shipping_method"
                             type="radio" 
                             id="groundRadio" 
                             name="shipping_method" 
                             class="custom-control-input shippingMethod" 
                             value="Ground"
+                         
                             checked 
+                            #shippingMethod="ngModel"
+                            [(ngModel)]="form.shippingMethod"
                         />
                         <label class="custom-control-label" for="groundRadio"><span class="shipping-type">Ground Shipping</span></label>
                     </div>
@@ -119,12 +136,13 @@
                 <div class="col-md-6">
                     <div class="custom-control custom-radio mb-3">
                         <input 
-                            formControlName="shipping_method"
                             type="radio" 
                             id="expeditedRadio" 
                             name="shipping_method" 
                             class="custom-control-input shippingMethod" 
                             value="Expedited"
+                            #shippingMethod="ngModel"
+                            [(ngModel)]="form.shippingMethod"
                         />
                         <label class="custom-control-label" for="expeditedRadio"><span class="shipping-type">Expedited Shipping</span></label>
                     </div>
@@ -132,8 +150,10 @@
                 <div class="col-md-6">$  {{ shippingRates?.Expedited }}</div>
             </div>
 
+   
+
             <div class="text-center">
-                <button type="submit" [disabled]="form.invalid" class="btn btn-success btn-shipping">Continue</button>
+                <button type="submit" [disabled]="f.invalid" class="btn btn-success btn-shipping">Continue</button>
             </div>
         </form> 
     </div>
