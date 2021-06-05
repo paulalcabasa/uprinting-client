@@ -1,6 +1,9 @@
+
 <form  class="form" #f="ngForm" (ngSubmit)="register(f.value)">
+    <input type="hidden" csrf />
+
     <div class="form-group">
-        <label for="">Email</label>
+        <label for="">Email <span class="text-danger">*</span></label>
         <input 
             pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
             required
@@ -21,7 +24,7 @@
         </small>
     </div>
     <div class="form-group">
-        <label for="">Password</label>
+        <label for="">Password <span class="text-danger">*</span></label>
         <input 
             maxlength="20"
             type="password" 
@@ -37,7 +40,7 @@
         </small>
     </div>
     <div class="form-group">
-        <label for="">Confirm Password</label>
+        <label for="">Confirm Password <span class="text-danger">*</span></label>
         <input 
             maxlength="20"
             type="password" 
@@ -67,7 +70,7 @@
         />
     </div>
     <div class="form-group">
-        <label for="">First Name</label>
+        <label for="">First Name <span class="text-danger">*</span></label>
         <input 
             maxlength="30"
             type="text" 
@@ -83,7 +86,7 @@
         </small>
     </div>
     <div class="form-group">
-        <label for="">Last Name</label>
+        <label for="">Last Name <span class="text-danger">*</span></label>
         <input 
             maxlength="30"
             type="text" 

@@ -39,7 +39,7 @@ export class CartService
     addToCart(cartItem) {
   
         let url = environment.app.api_url + '/cart';
-        let user = this.authService.parseAccessTokenData();
+        //let user = this.authService.parseAccessTokenData();
 
         cartItem.cartId = this.getCartId();
        // cartItem.customerId = user.data.customer_id;

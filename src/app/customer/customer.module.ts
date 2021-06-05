@@ -7,6 +7,7 @@ import { FormsModule  } from '@angular/forms';
 import { CustomerRoutes } from "./customer.routes";
 import { AuthService } from "../auth/service/auth.service";
 import { CustomerService } from "./service/customer.service";
+import { CsrfService } from "../auth/service/csrf.service";
 
 @NgModule({
     imports : [
@@ -21,7 +22,8 @@ import { CustomerService } from "./service/customer.service";
     ],
     providers : [
         AuthService,
-        CustomerService
+        CustomerService,
+        CsrfService
     ],
     exports : [
         

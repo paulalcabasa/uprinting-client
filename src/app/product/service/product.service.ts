@@ -8,12 +8,13 @@ import { map } from 'rxjs/operators';
 
 export class ProductService
 {
-
-    constructor(private http: HttpClient) {}
+    private url;
+    constructor(private http: HttpClient) {
+        this.url = environment.app.api_url;
+    }
 
     getProducts() {
-        let url = environment.app.api_url + '/product';
-        return this.http.get(url).pipe(
+        return this.http.get(this.url + "/product").pipe(
             catchError((error : any) => observableThrowError(error)));
     }
 

@@ -15,7 +15,7 @@
 			<div class="col-md-4 product-label">Price :</div>
 			<div class="col-md-8 product-price">$ {{ product.price }}</div>
 		</div>
-		<div class="row " *ngIf="false">
+		<div class="row " *ngIf="product.stock_qty == 0">
 			<div class="col-md-4"></div>
 			<div class="col-md-8 product-price text-danger">Out of stock!</div>
 		</div>

@@ -50,6 +50,9 @@ export class OrderShippingComponent implements OnInit {
 					this.cartService.deleteCart();
 					this.router.navigate(['order/confirmation/' + success.jobOrderId]);
 				}
+				else {
+					alert(success.message);
+				}
 				
 				console.log(success);
 			},

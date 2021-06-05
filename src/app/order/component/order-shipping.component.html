@@ -4,9 +4,11 @@
 
 <div class="row justify-content-md-center">
     <div class="col-lg-8">
+        <p class="alert alert-info">All fields with asterisk (*) are required.</p>
+        
         <form class="form" #f="ngForm" (ngSubmit)="processOrder(f.value)">
             <div class="form-group">
-                <label for="shippingName">Name</label>
+                <label for="shippingName">Name <span class="text-danger">*</span></label>
                 <input 
                     required
                     type="text" 
@@ -21,7 +23,7 @@
                 </small>
             </div>
             <div class="form-group">
-                <label for="shippingAddress1">Address 1</label>
+                <label for="shippingAddress1">Address 1 <span class="text-danger">*</span></label>
                 <input 
                     required
                     maxlength="35"
@@ -43,7 +45,6 @@
             <div class="form-group">
                 <label for="shippingAddress2">Address 2</label>
                 <input 
-                    maxlength="35"
                     type="text" 
                     id="shippingAddress2" 
                     name="shipping_address2" 
@@ -55,7 +56,6 @@
             <div class="form-group">
                 <label for="shippingAddress3">Address 3</label>
                 <input 
-                    maxlength="35"
                     type="text" 
                     id="shippingAddress3" 
                     name="shipping_address3" 
@@ -65,7 +65,7 @@
                 />
             </div>
             <div class="form-group">
-                <label for="city">City</label>
+                <label for="city">City <span class="text-danger">*</span></label>
                 <input 
                     required
                     maxlength="35"
@@ -81,7 +81,7 @@
                 </small>
              </div>
             <div class="form-group">
-                <label for="state">State</label>
+                <label for="state">State <span class="text-danger">*</span></label>
                 <input 
                     required
                     maxlength="35"
@@ -97,7 +97,7 @@
                 </small>
             </div>
             <div class="form-group">
-                <label for="country">Country</label>
+                <label for="country">Country <span class="text-danger">*</span></label>
                 <input 
                     required
                     maxlength="35"

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../auth/service/auth.service';
 import { CartService } from '../../cart/service/cart.service';
 import { ProductService } from '../service/product.service'
 
@@ -16,7 +17,8 @@ export class ProductDetailsComponent implements OnInit {
 		private ActivatedRoute: ActivatedRoute,
         private productService : ProductService,
 		private cartService: CartService,
-		private router: Router){}
+		private router: Router,
+		private authService: AuthService){}
 
     ngOnInit() {
 		this.qty = 1;
@@ -33,11 +35,20 @@ export class ProductDetailsComponent implements OnInit {
 
 	addToCart(product) {
 		
-		let cartItem = {
-			product : product,
-			quantity : this.qty
+		if(!this.qty){
+			alert("Please enter quantity");
 		}
 
+		let cartItem : any = {
+			product : product,
+			quantity : this.qty,
+			customerId : 0
+		}
+
+		if(this.authService.getAccessToken()) {
+			cartItem.customerId = this.authService.parseAccessTokenData().data.customer_id;
+		}
+	
 		this.cartService.addToCart(cartItem).subscribe(
 			success => { 
 				if(success.state) {

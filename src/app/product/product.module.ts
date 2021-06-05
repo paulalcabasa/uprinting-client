@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from "./component/product-details.component";
 import { ProductService } from './service/product.service';
 import { ProductDetailsButtonDirective } from "./directive/product-details-button.directive";
 import { AddToCartButtonDirective } from "./directive/add-to-cart-button.directive";
+import { NumbersOnlyInputDirective } from "./directive/numbers-only-input.directive";
 import { FormsModule  } from '@angular/forms';
 
 @NgModule(
@@ -22,7 +23,8 @@ import { FormsModule  } from '@angular/forms';
             ProductsComponent,
             ProductDetailsComponent,
             ProductDetailsButtonDirective,
-            AddToCartButtonDirective
+            AddToCartButtonDirective,
+            NumbersOnlyInputDirective
         ],
         providers : [
             ProductService
